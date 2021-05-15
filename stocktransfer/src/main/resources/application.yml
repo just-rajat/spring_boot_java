@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: 
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+  profiles:
+    active:
+    - stage
+server:
+  port: 9192
+
+springdoc:
+  swagger-ui:
+    path: /stock-transfer.html
+  api-docs:
+    enabled: true
+    path: /stock-transfer.doc
+
+info:
+ application: 
+  name: stock transfer system
+  version: 1.0
+ databse: PostgreSQL
+
+management: 
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    root: info
+---
+spring:
+  profiles: dev
+  datasource:
+    username: stocktransfer
+    password: 123
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+
+---
+spring:
+  profiles: stage
+  h2:
+    console:
+      enabled: true
+      path: /h2Console
